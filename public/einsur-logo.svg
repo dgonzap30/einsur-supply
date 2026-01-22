@@ -1,0 +1,15 @@
+<svg viewBox="0 0 280 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Star with E shape -->
+  <g transform="translate(0, 2)">
+    <!-- Yellow star outline -->
+    <path d="M28 2L33.5 18.5L51 21L38 32.5L41.5 50L28 41.5L14.5 50L18 32.5L5 21L22.5 18.5L28 2Z" fill="#FCEA01"/>
+    <!-- Indigo star fill -->
+    <path d="M28 6L32.5 19.5L48 21.5L37 31.5L40 46L28 39L16 46L19 31.5L8 21.5L23.5 19.5L28 6Z" fill="#2D2E82"/>
+    <!-- White E stripes -->
+    <rect x="15" y="18" width="14" height="3" rx="0.5" fill="white"/>
+    <rect x="15" y="26" width="11" height="3" rx="0.5" fill="white"/>
+    <rect x="15" y="34" width="14" height="3" rx="0.5" fill="white"/>
+  </g>
+  <!-- EINSUR text -->
+  <text x="62" y="40" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="36" fill="#2D2E82" letter-spacing="-1">EINSUR</text>
+</svg>

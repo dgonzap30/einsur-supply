@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hero Height - Modern viewport units with fallback */
+:root {
+  --hero-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --hero-height: 100dvh;
+  }
+}
+
+.hero-height {
+  min-height: var(--hero-height);
+  min-height: 100dvh;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #374151; /* gray-700 */
+  overflow-x: hidden;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Polish */
+h1, h2, h3, h4 {
+  letter-spacing: -0.03em;
+}
+
+p {
+  letter-spacing: -0.01em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F3F4F6; /* gray-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9CA3AF; /* gray-400 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B7280; /* gray-500 */
+}
+
+/* Solid Card Styles */
+@layer components {
+  .glass-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB; /* gray-200 */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-nav {
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #E5E7EB; /* gray-200 */
+  }
+
+  .hover-lift {
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  @media (hover: hover) {
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-color: #D1D5DB; /* gray-300 */
+    }
+  }
+
+  .clip-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  @media (min-width: 1024px) {
+    .clip-slant {
+      clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 calc(100% - 60px));
+    }
+  }
+
+  /* News Card Hover */
+  .news-card-img {
+    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .news-card:hover .news-card-img {
+    transform: scale(1.05);
+  }
+}
+
+/* Canvas Container */
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#canvas-container canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Marquee Animation */
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+/* Enhanced Card Hover */
+@layer components {
+  .glass-card {
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform, box-shadow;
+  }
+
+  @media (hover: hover) {
+    .glass-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-color: #D1D5DB; /* gray-300 */
+      transform: scale(1.01);
+    }
+  }
+}
+
+/* Text Balance for Modern Browsers */
+@supports (text-wrap: balance) {
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+/* Focus States for Accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #C44536; /* red-500 */
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Enhanced focus ring */
+button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(196, 69, 54, 0.3); /* red-500 with opacity */
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-scroll,
+  .animate-shimmer,
+  .animate-bounce,
+  .animate-pulse,
+  .animate-ping {
+    animation: none !important;
+  }
+}
+
+/* Smooth Image Loading - only for content images, not logos */
+img:not([alt*="logo" i]):not([alt*="Einsur" i]) {
+  background-color: rgba(229, 231, 235, 0.5); /* gray-200 */
+}
+
+/* Native lazy loading works without custom opacity handling */
+
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}

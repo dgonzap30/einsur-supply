@@ -1,0 +1,10 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Yellow outline star -->
+  <path d="M20 2L24.5 14.5L38 16L28 25L31 38L20 31L9 38L12 25L2 16L15.5 14.5L20 2Z" fill="#FFE600"/>
+  <!-- Indigo filled star -->
+  <path d="M20 4L23.8 15.2L36 16.5L27 24.5L29.5 36L20 29.5L10.5 36L13 24.5L4 16.5L16.2 15.2L20 4Z" fill="#4B4B9E"/>
+  <!-- White stripes forming the "E" -->
+  <rect x="6" y="11" width="14" height="2.5" rx="0.5" fill="white"/>
+  <rect x="6" y="18.5" width="12" height="2.5" rx="0.5" fill="white"/>
+  <rect x="6" y="26" width="14" height="2.5" rx="0.5" fill="white"/>
+</svg>
