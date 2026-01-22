@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Badge } from '../ui'
@@ -12,22 +12,12 @@ export function Hero({ onContactClick }) {
 
   // Content refs
   const contentRef = useRef(null)
-  const badgeRef = useRef(null)
   const line1Ref = useRef(null)
   const line2Ref = useRef(null)
   const line3Ref = useRef(null)
   const descriptionRef = useRef(null)
   const buttonsRef = useRef(null)
   const scrollIndicatorRef = useRef(null)
-
-  const [animationComplete, setAnimationComplete] = useState(false)
-
-  // Store reduced motion preference
-  const prefersReducedMotionRef = useRef(
-    typeof window !== 'undefined'
-      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      : false
-  )
 
   useEffect(() => {
     // Check for reduced motion
@@ -39,7 +29,6 @@ export function Hero({ onContactClick }) {
       // Skip animations, show content immediately
       gsap.set(
         [
-          badgeRef.current,
           line1Ref.current,
           line2Ref.current,
           line3Ref.current,
@@ -49,14 +38,12 @@ export function Hero({ onContactClick }) {
         ],
         { opacity: 1, y: 0, x: 0 }
       )
-      setAnimationComplete(true)
       return
     }
 
     // Set initial states
     gsap.set(
       [
-        badgeRef.current,
         line1Ref.current,
         line2Ref.current,
         line3Ref.current,
@@ -70,26 +57,7 @@ export function Hero({ onContactClick }) {
     // Master timeline - simplified entrance animation
     const masterTl = gsap.timeline({
       defaults: { ease: 'power3.out' },
-      onComplete: () => setAnimationComplete(true),
     })
-
-    // Badge drops in
-    masterTl.fromTo(
-      badgeRef.current,
-      {
-        y: -40,
-        opacity: 0,
-        scale: 0.9,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: 'back.out(1.5)',
-      },
-      0.2
-    )
 
     // Line 1: "Lideres en el"
     masterTl.fromTo(
@@ -205,35 +173,17 @@ export function Hero({ onContactClick }) {
     }
   }, [])
 
-  // Subtle floating animation for badge after entrance
-  useEffect(() => {
-    if (!animationComplete || prefersReducedMotionRef.current) return
-
-    const floatTl = gsap.timeline({ repeat: -1, yoyo: true })
-    floatTl.to(badgeRef.current, {
-      y: -3,
-      duration: 3,
-      ease: 'sine.inOut',
-    })
-
-    return () => {
-      floatTl.kill()
-    }
-  }, [animationComplete])
-
   return (
     <header
       ref={heroRef}
       id="hero"
-      className="relative w-full hero-height flex items-center justify-center overflow-hidden pt-16 pb-8 sm:pt-20 sm:pb-12 lg:pt-20 lg:pb-12 bg-gradient-to-b from-slate-50 to-white"
+      className="relative w-full hero-height flex items-center justify-center overflow-hidden pt-20 pb-8 sm:pt-24 sm:pb-12 lg:pt-32 lg:pb-12 bg-gradient-to-b from-slate-50 to-white"
     >
       <div ref={contentRef} className="container relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
-          <div ref={badgeRef}>
-            <Badge pulse className="mb-3 sm:mb-4 lg:mb-5">
-              ISO 9001:2015 Certificados
-            </Badge>
-          </div>
+          <Badge pulse className="mb-3 sm:mb-4 lg:mb-5">
+            ISO 9001:2015 Certificados
+          </Badge>
 
           <h1 className="font-display text-[2.5rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-8xl xl:text-8xl font-light sm:leading-[1.05] md:leading-[0.95] mb-4 sm:mb-6 lg:mb-8 tracking-tighter text-slate-800">
             <span ref={line1Ref} className="block overflow-hidden">
